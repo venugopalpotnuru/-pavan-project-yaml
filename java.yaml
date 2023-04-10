@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: java
+  name: java-springboot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: java-spring
+  template:
+    metadata:
+      labels:
+        type: java-spring
+    spec:
+      containers:
+        - name: frontend
+          image: dharamkari/springboot:java-spring-v1
+          ports:
+            - containerPort: 8080
+              name: java-port  

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: database
+  name: mariadb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: database
+  template:
+    metadata:
+      labels:
+        type: database
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb
+          ports:
+            - containerPort: 3306
+              name: db-port  
+          env:
+            - name: MARIADB_USER
+              value: devops
+            - name: MARIADB_PASSWORD
+              value: devops@123
+            - name: MARIADB_ROOT_PASSWORD
+              value: root@123    
+                
+                      
