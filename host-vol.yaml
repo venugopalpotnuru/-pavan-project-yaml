@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-hostpath
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: helloworldhostpath
+  template:
+    metadata:
+      labels:
+        run: helloworldhostpath
+    spec:
+      volumes:
+        - name: task-pv-storage
+          hostPath:
+            path: /tmp
+            type: Directory
+      containers:
+      - name: helloworld
+        image: mariadb
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+         - name: task-pv-storage
+           mountPath: /var/lib/mysql
+        env:
+          - name: MARIADB_ROOT_PASSWORD
+            value: root@123
+          - name: MARIADB_USER
+            value: devops
+          - name: MARIADB_PASSWORD
+            value: devops@123    
+

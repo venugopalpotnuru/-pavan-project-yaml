@@ -25,6 +25,9 @@ spec:
             - name: MARIADB_PASSWORD
               value: devops@123
             - name: MARIADB_ROOT_PASSWORD
-              value: root@123    
-                
+              value: root@123   
+      volumes:
+        - name: html-volume
+          persistentVolumeClaim:
+            claimName: mypvc-dynamic     
                       
